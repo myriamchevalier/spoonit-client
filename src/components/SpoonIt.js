@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router";
 import { ApplicationViews } from "./ApplicationViews";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
+import { NavBar } from "./nav/NavBar";
 
 export const SpoonIt = () => {
     return (<>
@@ -11,6 +12,7 @@ export const SpoonIt = () => {
                 return <>
                     <Route>
                         <ApplicationViews />
+                        <NavBar />
                     </Route>
                 </>
             } else {
