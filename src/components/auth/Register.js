@@ -5,7 +5,6 @@ export const Register = () => {
     const firstName = useRef()
     const lastName = useRef()
     const username = useRef()
-    const bio = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
