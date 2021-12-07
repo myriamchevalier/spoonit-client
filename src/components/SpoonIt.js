@@ -11,8 +11,8 @@ export const SpoonIt = () => {
             if (localStorage.getItem('si_token')) {
                 return <>
                     <Route>
-                        <ApplicationViews />
                         <NavBar />
+                        <ApplicationViews />
                     </Route>
                 </>
             } else {
