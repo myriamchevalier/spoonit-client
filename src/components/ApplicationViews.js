@@ -5,6 +5,7 @@ import { TaskList } from "./tasks/TaskList";
 
 export const ApplicationViews = () => {
     return <>
+            
             <Route exact path="/">
                 <Randomizer />
             </Route>
