@@ -6,6 +6,8 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 
 export const TaskList = () => {
     const [ tasks, setTasks ] = useState([])
+    const [ categories, setCategories] = useState([])
+    const [ spoons, setSpoons] = useState([])
 
     const taskFetcher = () => {
         getAllTasks().then(data=>setTasks(data))
@@ -15,6 +17,7 @@ export const TaskList = () => {
         taskFetcher()
     }, [])
     return (
+        <>
         <Row xs='auto'md='auto' lg='auto'>
             {
                 tasks.map(task => {
@@ -29,5 +32,6 @@ export const TaskList = () => {
                 })
             }
         </Row>
+        </>
     )
 }
