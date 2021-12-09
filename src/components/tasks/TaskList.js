@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllCategories, getAllSpoons, getTasks } from "./TaskManager";
-import { Button, Card, Form, Row } from "react-bootstrap";
+import { Button, Card, Form, Row, InputGroup} from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 
 export const TaskList = () => {
@@ -19,51 +19,64 @@ export const TaskList = () => {
         getAllSpoons().then(data => setSpoons(data))
     }, [])
 
+    const handleControlledInputChange = (e) => {
+        const value = e.currentTarget.value
+        const updatedParams = { ...params }
+        if (value) {
+            updatedParams[e.currentTarget.name] = value
+        } else {
+            delete updatedParams[e.currentTarget.name]
+        }
+        setParams(updatedParams)
+    }
+
     return (
         <>
             {/* Top of page, filtering options */}
-            <Form>
-                <Form.Label>Filter by Category</Form.Label>
-                <Form.Select onChange={(e) => { 
-                    const value = e.currentTarget.value // grabbing the value of what user selects
-                    const updatedParams = { ...params } // making a copy of the params state
-                    if (value) {
-                        updatedParams.categoryId = value // if user selects a category, value added to copy of state
-                    } else {
-                        delete updatedParams.categoryId // if user unselects a category, delete categoryId from the copy of state
-                    }
-                    setParams(updatedParams) // No matter what, params state gets updated with copy of state.
-                }}>
+            <form>
+                <fieldset>
+                    <div className='form-group'>
+                        <label htmlFor='categoryId'>Filter by Category</label>
+                        <select name='categoryId' onChange={handleControlledInputChange}>
                     <option value="" >Select a category</option>
                     {
                         categories.map(cat => {
                             return <option value={cat.id}>{cat.label}</option>
                         })
                     }
-                </Form.Select>
+                        </select>
+                    </div>
+                </fieldset>
 
-                <Form.Label>Filter by amount of spoons</Form.Label>
-                <Form.Select onChange={(e) => {
-                    const value = e.currentTarget.value
-                    const updatedParams = { ...params }
-                    if (value) {
-                        updatedParams.spoonId = value
-                    } else {
-                        delete updatedParams.spoonId
-                    }
-                    setParams(updatedParams)
-                }
-
-                }>
-                    <option value="">Select a number of spoons</option>
+                <fieldset>
+                    <div className='form-group'>
+                        <label htmlFor='spoonId'>Filter by Category</label>
+                        <select name='spoonId' onChange={handleControlledInputChange}>
+                    <option value="" >Select an amount of spoons</option>
                     {
                         spoons.map(spoon => {
                             return <option value={spoon.id}>{spoon.number_of_spoons}</option>
                         })
                     }
-                </Form.Select>
-                <Button onClick={taskFetcher}>Apply filters</Button>
-            </Form>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div className='form-group'>
+                        <label htmlFor='createdBy'>What view would you prefer?</label>
+                        <input type='radio' name='createdBy' value='' onChange={handleControlledInputChange}/> All Tasks
+                        <input type='radio' name='createdBy' value='tr' onChange={handleControlledInputChange}/> My Tasks Only
+                     
+                    </div>
+                </fieldset>
+        
+                <button onClick={(event)=> {
+                event.preventDefault() 
+                taskFetcher()
+                }}>Apply filters</button>
+                    
+            </form>
 
             <Row xs='auto' md='auto' lg='auto'>
                 {
