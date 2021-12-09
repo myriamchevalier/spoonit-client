@@ -63,3 +63,15 @@ export const getAllSpoons = () => {
     })
         .then(response => response.json())
 }
+
+export const createNewTask = (newTask) => {
+    return fetch("http://localhost:8000/tasks", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("si_token")}`
+        },
+        body: JSON.stringify(newTask)
+     })
+        .then(getTasks)
+}

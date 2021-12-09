@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 import { Randomizer } from "./tasks/Randomizer";
 import { TaskList } from "./tasks/TaskList";
+import { TaskForm } from "./tasks/TaskForm";
 
 export const ApplicationViews = () => {
     return <>
@@ -11,6 +12,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/tasks">
                 <TaskList />
+            </Route>
+            <Route exact path="/tasks/form">
+                <TaskForm />
             </Route>
     </>
 }
