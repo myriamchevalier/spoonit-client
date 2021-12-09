@@ -1,13 +1,17 @@
 // Options to filter tasks combined with og fetch.
 
 export const getTasks = (params) => {
-    let endpoint = "";
-    const { categoryId, spoonId } = params // Deconstructing params obj. 
+    let url = "";
+    const { categoryId, spoonId, createdBy } = params // Deconstructing params obj. 
     
-    if (categoryId && spoonId) endpoint = `http://localhost:8000/tasks?category=${categoryId}&spoon=${spoonId}`;
-    else if (categoryId && !spoonId) endpoint = `http://localhost:8000/tasks?category=${categoryId}`;
-    else if (!categoryId && spoonId) endpoint = `http://localhost:8000/tasks?spoon=${spoonId}`;
-    else endpoint = "http://localhost:8000/tasks";
+    if (categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks?category=${categoryId}&spoon=${spoonId}&created_by`;
+    else if (categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks?category=${categoryId}&spoon=${spoonId}`;
+    else if (categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks?category=${categoryId}&created_by`;
+    else if (categoryId && !spoonId && !createdBy) url = `http://localhost:8000/tasks?category=${categoryId}`;
+    else if (!categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks?spoon=${spoonId}&created_by`;
+    else if (!categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks?spoon=${spoonId}`;
+    else if (!categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks?created_by`;
+    else url = "http://localhost:8000/tasks";
     
     const options = {
         headers: {
@@ -15,7 +19,30 @@ export const getTasks = (params) => {
         }
     }
     
-    return fetch(endpoint, options)
+    return fetch(url, options)
+    .then(res => res.json())
+}
+
+export const getRandomTask = (params) => {
+    let url = "";
+    const { categoryId, spoonId, createdBy } = params // Deconstructing params obj. 
+    
+    if (categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&spoon=${spoonId}&created_by`;
+    else if (categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&spoon=${spoonId}`;
+    else if (categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&created_by`;
+    else if (categoryId && !spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}`;
+    else if (!categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?spoon=${spoonId}&created_by`;
+    else if (!categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?spoon=${spoonId}`;
+    else if (!categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?created_by`;
+    else url = "http://localhost:8000/tasks/random_task";
+    
+    const options = {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("si_token")}`
+        }
+    }
+    
+    return fetch(url, options)
     .then(res => res.json())
 }
 
