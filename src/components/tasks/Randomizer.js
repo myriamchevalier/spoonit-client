@@ -60,7 +60,7 @@ export const Randomizer = () => {
 
                 <fieldset>
                     <div className='form-group'>
-                        <label htmlFor='spoonId'>Filter by Category</label>
+                        <label htmlFor='spoonId'>Filter by Spoons</label>
                         <select name='spoonId' onChange={handleControlledInputChange}>
                     <option value="" >Select an amount of spoons</option>
                     {
