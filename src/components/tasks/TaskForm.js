@@ -18,7 +18,7 @@ export const TaskForm = () => {
                 <h1>Create New Task</h1>
                 
                 <fieldset>
-                    <div>
+                    <div className='form-group'>
                         <label htmlFor='name'>Name</label>
                         <input type='text' name='name' placeholder='Task Name'/>
                     </div>
@@ -27,7 +27,7 @@ export const TaskForm = () => {
                 <fieldset>
                     <div className='form-group'>
                         <label htmlFor='categoryId'>Category</label>
-                        <select name='categoryId' onChange={handleControlledInputChange}>
+                        <select name='categoryId' >
                     <option value="" >Select a category</option>
                     {
                         categories.map(cat => {
@@ -41,7 +41,7 @@ export const TaskForm = () => {
                 <fieldset>
                     <div className='form-group'>
                         <label htmlFor='spoonId'>Spoons</label>
-                        <select name='spoonId' onChange={handleControlledInputChange}>
+                        <select name='spoonId' >
                     <option value="" >Select an amount of spoons</option>
                     {
                         spoons.map(spoon => {
@@ -51,9 +51,15 @@ export const TaskForm = () => {
                         </select>
                     </div>
                 </fieldset>
+
+                <fieldset>
+                    <div className='form-group'>
+                        <label htmlFor='description'>Description</label>
+                        <input type='textarea' name='description' placeholder='Task Description'/>
+                    </div>
+                </fieldset>
             </form>
  
         </>
     )
 }
-'category', 'spoon', 'description'
