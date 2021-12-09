@@ -41,7 +41,7 @@ export const TaskList = () => {
                     <option value="" >Select a category</option>
                     {
                         categories.map(cat => {
-                            return <option value={cat.id}>{cat.label}</option>
+                            return <option value={cat.id} key={cat.id}>{cat.label}</option>
                         })
                     }
                         </select>
@@ -55,7 +55,7 @@ export const TaskList = () => {
                     <option value="" >Select an amount of spoons</option>
                     {
                         spoons.map(spoon => {
-                            return <option value={spoon.id}>{spoon.number_of_spoons}</option>
+                            return <option value={spoon.id} key={spoon.id}>{spoon.number_of_spoons}</option>
                         })
                     }
                         </select>

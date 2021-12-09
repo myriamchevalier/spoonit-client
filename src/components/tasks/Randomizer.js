@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
 import { getRandomTask, getAllCategories, getAllSpoons } from "./TaskManager";
 
 export const Randomizer = () => {
@@ -6,6 +7,7 @@ export const Randomizer = () => {
     const [categories, setCategories] = useState([])
     const [spoons, setSpoons] = useState([])
     const [params, setParams] = useState({})
+    const [newRoll, setNewRoll] = useState(false)
 
     const randomTaskFetcher = () => {
         getRandomTask(params).then(data => {setRandomTask(data)}) // passing params as an argument.
@@ -28,6 +30,16 @@ export const Randomizer = () => {
         setParams(updatedParams)
     }
 
+    const handleNewRoll = (e) => {
+        e.preventDefault()
+        newRoll ? setNewRoll(false) :
+        setNewRoll(true)
+    }
+
+    useEffect(() => {
+        randomTaskFetcher()
+    }, [newRoll])
+
     return <>
         <h1>SpoonIt!</h1>
                     {/* Top of page, filtering options */}
@@ -39,7 +51,7 @@ export const Randomizer = () => {
                     <option value="" >Select a category</option>
                     {
                         categories.map(cat => {
-                            return <option value={cat.id}>{cat.label}</option>
+                            return <option value={cat.id} key={cat.id}>{cat.label}</option>
                         })
                     }
                         </select>
@@ -53,7 +65,7 @@ export const Randomizer = () => {
                     <option value="" >Select an amount of spoons</option>
                     {
                         spoons.map(spoon => {
-                            return <option value={spoon.id}>{spoon.number_of_spoons}</option>
+                            return <option value={spoon.id} key={spoon.id}>{spoon.number_of_spoons}</option>
                         })
                     }
                         </select>
@@ -77,8 +89,21 @@ export const Randomizer = () => {
                     
             </form>
 
-
-
-        
+            <div>
+                {randomTask ?
+                <Card key={randomTask.id} style={{ width: '18rem', margin: '2rem' }}>
+                    <Card.Header>{randomTask.category?.label}</Card.Header>
+                    <Card.Body key={randomTask.id}>
+                        <Card.Title>{randomTask.name}</Card.Title>
+                        <Card.Text>{randomTask.description}</Card.Text>
+                        <Card.Text>Spoons: {randomTask.spoon?.number_of_spoons}</Card.Text>
+                    </Card.Body>
+                    
+                </Card> :
+                <p>No result to be displayed</p>}
+            </div>
+            <div>
+            <button onClick={handleNewRoll}>Roll New Task!</button>
+            </div>        
     </>
 }
