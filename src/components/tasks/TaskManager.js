@@ -23,6 +23,29 @@ export const getTasks = (params) => {
     .then(res => res.json())
 }
 
+export const getRandomTask = (params) => {
+    let url = "";
+    const { categoryId, spoonId, createdBy } = params // Deconstructing params obj. 
+    
+    if (categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&spoon=${spoonId}&created_by`;
+    else if (categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&spoon=${spoonId}`;
+    else if (categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&created_by`;
+    else if (categoryId && !spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}`;
+    else if (!categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?spoon=${spoonId}&created_by`;
+    else if (!categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?spoon=${spoonId}`;
+    else if (!categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?created_by`;
+    else url = "http://localhost:8000/tasks/random_task";
+    
+    const options = {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("si_token")}`
+        }
+    }
+    
+    return fetch(url, options)
+    .then(res => res.json())
+}
+
 export const getAllCategories = () => {
     return fetch("http://localhost:8000/categories", {
         headers:{
