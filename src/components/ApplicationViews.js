@@ -19,5 +19,8 @@ export const ApplicationViews = () => {
             <Route exact path="/tasks/edit/:taskId(\d+)">
                 <TaskForm />
             </Route>
+            <Route exact path="tips">
+                Tips
+            </Route>
     </>
 }
