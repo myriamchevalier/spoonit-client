@@ -46,6 +46,15 @@ export const getRandomTask = (params) => {
     .then(res => res.json())
 }
 
+export const getSingleTask = (id) => {
+    return fetch(`http://localhost:8000/tasks/${id}`, {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("si_token")}`
+        }
+    })
+    .then(res => res.json())
+}
+
 export const getAllCategories = () => {
     return fetch("http://localhost:8000/categories", {
         headers:{
@@ -72,6 +81,18 @@ export const createNewTask = (newTask) => {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         },
         body: JSON.stringify(newTask)
+     })
+        .then(getTasks)
+}
+
+export const updateTask = (task) => {
+    return fetch(`http://localhost:8000/tasks/${task.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("si_token")}`
+        },
+        body: JSON.stringify(task)
      })
         .then(getTasks)
 }
