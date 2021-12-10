@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import { getAllCategories, getAllSpoons, createNewTask } from "./TaskManager";
+import { useHistory, useParams } from "react-router";
+import { getAllCategories, getAllSpoons, createNewTask, getSingleTask, updateTask } from "./TaskManager";
 
 
 export const TaskForm = () => {
@@ -8,11 +8,25 @@ export const TaskForm = () => {
     const [spoons, setSpoons] = useState([])
     const [task, setTask] = useState({})
     const history = useHistory()
+    const { taskId } = useParams()
 
     useEffect(() => {
         getAllCategories().then(data => setCategories(data))
         getAllSpoons().then(data => setSpoons(data))
     }, [])
+
+    useEffect(() => {
+        if (taskId) {
+            getSingleTask(taskId).then((taskData) => {
+                setTask(
+                    // Unpack response
+                    {...taskData,
+                    categoryId: taskData.category.id,
+                    spoonId: taskData.spoon.id}
+                )
+            })
+        }
+    },[taskId])
 
     const handleControlledInputChange = (e) => {
         const newTask = {...task}
@@ -23,19 +37,21 @@ export const TaskForm = () => {
     return (
         <>
             <form>
-                <h1>Create New Task</h1>
+                <h2>{taskId ? 'Update a task': 'Create new task'}</h2>
                 
                 <fieldset>
                     <div className='form-group'>
                         <label htmlFor='name'>Name</label>
-                        <input type='text' name='name' placeholder='Task Name' onChange={handleControlledInputChange}/>
+                        <input type='text' name='name' placeholder='Task Name' 
+                        value={task.name} onChange={handleControlledInputChange}/>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <div className='form-group'>
                         <label htmlFor='categoryId'>Category</label>
-                        <select name='categoryId' onChange={handleControlledInputChange}>
+                        <select name='categoryId' value={task.categoryId} 
+                        onChange={handleControlledInputChange}>
                     <option value="" >Select a category</option>
                     {
                         categories.map(cat => {
@@ -49,7 +65,8 @@ export const TaskForm = () => {
                 <fieldset>
                     <div className='form-group'>
                         <label htmlFor='spoonId'>Spoons</label>
-                        <select name='spoonId' onChange={handleControlledInputChange}>
+                        <select name='spoonId' value={task.spoonId} 
+                        onChange={handleControlledInputChange}>
                     <option value="" >Select an amount of spoons</option>
                     {
                         spoons.map(spoon => {
@@ -63,16 +80,18 @@ export const TaskForm = () => {
                 <fieldset>
                     <div className='form-group'>
                         <label htmlFor='description'>Description</label>
-                        <input type='textarea' name='description' placeholder='Task Description' onChange={handleControlledInputChange}/>
+                        <input type='textarea' name='description' placeholder='Task Description' 
+                        value={task.description} onChange={handleControlledInputChange}/>
                     </div>
                 </fieldset>
             </form>
 
             <button onClick={e => {
             e.preventDefault()
-            createNewTask(task)
-            .then(history.push('/tasks'))}}>Save Task</button>
- 
+            taskId ? updateTask(task)
+            .then(() => history.push('/tasks')) 
+            : createNewTask(task)
+            .then(() => history.push('/tasks'))}}>Save Task</button>
         </>
     )
 }

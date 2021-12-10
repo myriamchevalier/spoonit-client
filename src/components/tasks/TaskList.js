@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getAllCategories, getAllSpoons, getTasks } from "./TaskManager";
-import { Button, Card, Form, Row, InputGroup} from "react-bootstrap";
+import { deleteTask, getAllCategories, getAllSpoons, getTasks } from "./TaskManager";
+import { Card, Row} from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import { useHistory } from "react-router";
 
 export const TaskList = () => {
     const [tasks, setTasks] = useState([])
     const [categories, setCategories] = useState([])
     const [spoons, setSpoons] = useState([])
     const [params, setParams] = useState({}) // state to contain filter parameters.
+    const history = useHistory()
     
     const taskFetcher = () => {
         getTasks(params).then(data => {setTasks(data)}) // passing params as an argument.
@@ -28,6 +30,11 @@ export const TaskList = () => {
             delete updatedParams[e.currentTarget.name]
         }
         setParams(updatedParams)
+    }
+
+    const onDelete = (id) => {
+        const updatedTasks = tasks.filter(t => t.id !== id)
+        setTasks(updatedTasks)
     }
 
     return (
@@ -89,6 +96,11 @@ export const TaskList = () => {
                                 <Card.Title>{task.name}</Card.Title>
                                 <Card.Text>{task.description}</Card.Text>
                                 <Card.Text>Spoons: {task.spoon?.number_of_spoons}</Card.Text>
+                                {task.is_universal ? "" : <button onClick={()=> {
+                                history.push({ pathname: `/tasks/edit/${task.id}`})}}>Edit</button>} 
+                                {task.is_universal ? "" : <button onClick={()=> 
+                                deleteTask(task.id)
+                                .then(onDelete(task.id))}>Delete</button>}
                             </Card.Body>
                         </Card>
                     })
