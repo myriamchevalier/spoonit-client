@@ -96,7 +96,7 @@ export const TaskList = () => {
                                 <Card.Title>{task.name}</Card.Title>
                                 <Card.Text>{task.description}</Card.Text>
                                 <Card.Text>Spoons: {task.spoon?.number_of_spoons}</Card.Text>
-                                {task.is_universal ? "" : <button onClick={()=> {
+                                {task.is_universal ? " " : <button onClick={()=> {
                                 history.push({ pathname: `/tasks/edit/${task.id}`})}}>Edit</button>} 
                                 {task.is_universal ? "" : <button onClick={()=> 
                                 deleteTask(task.id)
