@@ -96,3 +96,12 @@ export const updateTask = (task) => {
      })
         .then(getTasks)
 }
+
+export const deleteTask = (id) => {
+    return fetch(`http://localhost:8000/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("si_token")}`
+        }})
+        .then(getTasks)
+}
