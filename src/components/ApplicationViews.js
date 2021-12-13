@@ -3,6 +3,7 @@ import { Route } from "react-router";
 import { Randomizer } from "./tasks/Randomizer";
 import { TaskList } from "./tasks/TaskList";
 import { TaskForm } from "./tasks/TaskForm";
+import { TipList } from "./tips/TipList";
 
 export const ApplicationViews = () => {
     return <>
@@ -19,8 +20,8 @@ export const ApplicationViews = () => {
             <Route exact path="/tasks/edit/:taskId(\d+)">
                 <TaskForm />
             </Route>
-            <Route exact path="tips">
-                Tips
+            <Route exact path="/tips">
+                <TipList />
             </Route>
     </>
 }
