@@ -45,12 +45,12 @@ export const TaskList = () => {
                     <div className='form-group'>
                         <label htmlFor='categoryId'>Filter by Category</label>
                         <select name='categoryId' onChange={handleControlledInputChange}>
-                    <option value="" >Select a category</option>
-                    {
-                        categories.map(cat => {
-                            return <option value={cat.id} key={cat.id}>{cat.label}</option>
-                        })
-                    }
+                            <option value="" >Select a category</option>
+                            {
+                                categories.map(cat => {
+                                    return <option value={cat.id} key={cat.id}>{cat.label}</option>
+                                })
+                            }
                         </select>
                     </div>
                 </fieldset>
@@ -59,12 +59,12 @@ export const TaskList = () => {
                     <div className='form-group'>
                         <label htmlFor='spoonId'>Filter by Spoons</label>
                         <select name='spoonId' onChange={handleControlledInputChange}>
-                    <option value="" >Select an amount of spoons</option>
-                    {
-                        spoons.map(spoon => {
-                            return <option value={spoon.id} key={spoon.id}>{spoon.number_of_spoons}</option>
-                        })
-                    }
+                            <option value="" >Select an amount of spoons</option>
+                            {
+                                spoons.map(spoon => {
+                                    return <option value={spoon.id} key={spoon.id}>{spoon.number_of_spoons}</option>
+                                })
+                            }
                         </select>
                     </div>
                 </fieldset>
