@@ -7,8 +7,11 @@ export const TipList = () => {
     const [tips, setTips] = useState([])
     const [params, setParams] = useState({}) //State for query parameters(if applicable)
 
-    useEffect(() => {
+    const tipFetcher = () => {
         getTips(params).then(data => {setTips(data)})
+    }
+    useEffect(() => {
+        tipFetcher()
         getTopics().then(data => {setTopics(data)})
     }, [])
 
@@ -33,12 +36,16 @@ export const TipList = () => {
                             <option value=''>Select a topic</option>
                             {
                                 topics.map(t => {
-                                    return <option value={t.if} key={t.id}>{t.label}</option>
+                                    return <option value={t.id} key={t.id}>{t.label}</option>
                                 })
                             }
                         </select>
                     </div>
                 </fieldset>
+                <button onClick={(event) => {
+                    event.preventDefault()
+                    tipFetcher()
+                }}>Apply filter</button>
             </form>
 
             <article>
