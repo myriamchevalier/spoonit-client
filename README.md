@@ -1,73 +1,56 @@
 # View server-side code : [SpoonIt! Server](https://github.com/myriamchevalier/spoonit-server)
 
+# SpoonIt! Client
+This task randomizer application was inspired by the Spoon Theory, and people who use it help mange their day. 
+It can be hard to know where to start when the backlog of to-do keeps growing, and the randomizer aims to take decision paralysis out of the equation.
 
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Motivation
+As far as I can remember, housework has been a struggle for me, and no amount of to-do lists helped me. When I was younger, I found an app that randomized tasks based on how much time you wanted to spend on it. It helped, but there were days when tasks that were labeled `10 minutes` would take me much more time, because my energy levels were lower that day. 
 
-## Available Scripts
+Growing up, I learned about the Spoon Theory, and how it might help me manage my spoons (energy level) better. I started thinking about building a task randomizer app based on the Spoon Theory the very day I decided to go to Nashville Software School.
 
-In the project directory, you can run:
+I also added a section for users to share tips, as dealing with chronic pain or conditions that make you a "spoonie" can be very isolating and discouraging, and I wanted to have a way for users to feel connected to a community.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Client
 
-### `npm test`
+```
+git clone git@github.com:myriamchevalier/spoonit-client.git
+npm install
+npm start
+```
+### Server
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone git@github.com:myriamchevalier/spoonit-server.git
+pipenv shell
+pipenv install
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py loaddata topics categories spoons tasks
 
-### `npm run build`
+python3 manage.py runserver
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to use
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Clone the client and server sides of the application and do the installations.
+In the app, register as a new user.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The task randomizer is the user's homepage. From there, users can roll to get a random task, or select filters and apply them to their roll.
 
-### `npm run eject`
+Users can navigate to **Manage task**, where they will see a list of tasks, have the option to create new ones, edit and delete tasks they have previously created.
+They also have the option to filter by tasks they have created, by category, and by number of spoons.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Users can also navigate to **Manage tips**, where they can view all tips shared by other users and themselves. They can create, edit and delete tips.
+They also have the option to filter the tips by topic.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ERD
+<p float="left">
+    <img src="./src/images/SpoonIt_ERD.png" alt="ERD" width="800" height="400">
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
