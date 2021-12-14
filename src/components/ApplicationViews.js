@@ -4,6 +4,7 @@ import { Randomizer } from "./tasks/Randomizer";
 import { TaskList } from "./tasks/TaskList";
 import { TaskForm } from "./tasks/TaskForm";
 import { TipList } from "./tips/TipList";
+import { TipForm } from "./tips/TipForm";
 
 export const ApplicationViews = () => {
     return <>
@@ -22,6 +23,12 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/tips">
                 <TipList />
+            </Route>
+            <Route exact path="/tips/form">
+                <TipForm />
+            </Route>
+            <Route exact path="/tips/edit/:tipId(\d+)">
+                <TipForm />
             </Route>
     </>
 }
