@@ -1,0 +1,17 @@
+.rand-container {
+    display: flex;
+    background-image: linear-gradient(to top, #FFE5D6, white);
+}
+
+
+.rand-filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2em
+}  
+.rand-task-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

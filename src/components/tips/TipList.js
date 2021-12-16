@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-
 import { deleteTip, getCurrentUser, getTips, getTopics } from "./TipManager";
+import "./TipList.css"
 
 export const TipList = () => {
     const [topics, setTopics] = useState([])
@@ -39,51 +39,56 @@ export const TipList = () => {
 
     return (
         <>
-            <article>
+            <article className="tip-container">
 
-                <form>
+                <form className="tip-filter">
                     <fieldset>
-                        <div className='form-group'>
-                            <label htmlFor='topicId'></label>
-                            <select name='topicId' onChange={handleControlledInputChange}>
-                                <option value=''>Select a topic</option>
-                                {
-                                    topics.map(t => {
-                                        return <option value={t.id} key={t.id}>{t.label}</option>
-                                    })
-                                }
-                            </select>
-                        </div>
+                        <label htmlFor='topicId'></label>
+                        <select name='topicId' onChange={handleControlledInputChange}>
+                            <option value=''>Select a topic</option>
+                            {
+                                topics.map(t => {
+                                    return <option value={t.id} key={t.id}>{t.label}</option>
+                                })
+                            }
+                        </select>
                     </fieldset>
-                    <button onClick={(event) => {
-                        event.preventDefault()
-                        tipFetcher()
-                    }}>Apply filter</button>
+                    <div className="buttons">
+                        <button onClick={(event) => {
+                            event.preventDefault()
+                            tipFetcher()
+                        }}>Apply filter</button>
+                        <div className="button-add">
+                            <button onClick={() => {
+                                history.push({ pathname: "/tips/form" })
+                            }}>Share a tip!</button>
+                        </div>
+                    </div>
                 </form>
 
-                <article>
+                <section>
                     {
                         tips.length === 0 ?
                             <p>There are not results to be displayed</p> :
                             tips.map(tip => {
                                 return <div className='tip-box'>
-                                    <p>{tip.topic.label}</p>
-                                    <div>{tip.content}</div>
-                                    <div>{tip.spoonie.first_name}</div>
-                                    {currentUser.id === tip.spoonie.id ? 
-                                    <div>
-                                        <button onClick={()=> {
-                                        history.push({ pathname: `/tips/edit/${tip.id}`})}}>Edit</button>
-                                        <button onClick={()=> deleteTip(tip.id)
-                                        .then(onDelete(tip.id))}>Delete</button>
-                                    </div> 
-                                    : ''}
+                                    <p><strong>{tip.topic.label}</strong></p>
+                                    <div className="tip-content">{tip.content}</div>
+                                    <div>Tip from {tip.spoonie.first_name}</div>
+                                    {currentUser.id === tip.spoonie.id ?
+                                        <div>
+                                            <button onClick={() => {
+                                                history.push({ pathname: `/tips/edit/${tip.id}` })
+                                            }}>Edit</button>
+                                            <button onClick={() => deleteTip(tip.id)
+                                                .then(onDelete(tip.id))}>Delete</button>
+                                        </div>
+                                        : ''}
                                 </div>
                             })
                     }
-                </article>
-                <button onClick={()=> {
-                history.push({ pathname: "/tips/form"})}}>Share a tip!</button>
+                </section>
+
             </article>
         </>
     )

@@ -1,0 +1,26 @@
+.tip-container {
+    display: flex;
+}
+
+.button-add {
+    margin-top: 2rem;
+}
+
+.tip-filter {
+    margin: 2rem;
+}
+
+.buttons {
+    margin-top: 1rem;
+}
+
+.tip-box{
+    border: 5px solid #006664;
+    border-radius: 10%;
+    margin: 1rem;
+    padding: 2rem;
+}
+
+.tip-content{
+    margin-bottom: 1rem;
+}
