@@ -87,13 +87,16 @@ export const TaskForm = () => {
                                 value={task.description} onChange={handleControlledInputChange} />
                         </div>
                     </fieldset>
-            <button onClick={e => {
-                e.preventDefault()
-                taskId ? updateTask(task)
-                    .then(() => history.push('/tasks'))
-                    : createNewTask(task)
-                        .then(() => history.push('/tasks'))
-            }}>Save Task</button>
+                    <button onClick={e => {
+                        e.preventDefault()
+                        taskId ? updateTask(task)
+                            .then(() => history.push('/tasks'))
+                            : createNewTask(task)
+                                .then(() => history.push('/tasks'))
+                    }}>Save Task</button>
+                    <button onClick={() => {
+                        history.push({ pathname: `/tasks` })
+                    }}>Cancel</button>
                 </form>
             </div>
 
