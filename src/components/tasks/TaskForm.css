@@ -1,0 +1,16 @@
+.form-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 15%;
+    border: 4px solid #006664;
+    max-width: fit-content;
+    justify-content: center;
+    margin-left: 35%;
+    margin-top: 10%;
+}
+
+.task-form {
+
+    margin: 2rem;
+
+}
