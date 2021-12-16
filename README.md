@@ -12,7 +12,8 @@ Growing up, I learned about the Spoon Theory, and how it might help me manage my
 
 I also added a section for users to share tips, as dealing with chronic pain or conditions that make you a "spoonie" can be very isolating and discouraging, and I wanted to have a way for users to feel connected to a community.
 
-
+## Deployed app
+[SpoonIt!](https://spoonit-client.herokuapp.com/)
 ## Setup
 
 ### Client
