@@ -2,8 +2,8 @@ export const getTips = (params) => {
     let url = "";
     const { topicId } = params
 
-    if (topicId) url = `http://localhost:8000/tips?topic=${topicId}`
-    else url = "http://localhost:8000/tips"
+    if (topicId) url = `https://spoon-it.herokuapp.com/tips?topic=${topicId}`
+    else url = "https://spoon-it.herokuapp.com/tips"
 
     const options = {
         headers: {
@@ -16,7 +16,7 @@ export const getTips = (params) => {
 }
 
 export const getTopics = () => {
-    return fetch("http://localhost:8000/topics", {
+    return fetch("https://spoon-it.herokuapp.com/topics", {
         headers: {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         }
@@ -25,7 +25,7 @@ export const getTopics = () => {
 }
 
 export const getSingleTip = (id) => {
-    return fetch(`http://localhost:8000/tips/${id}`, {
+    return fetch(`https://spoon-it.herokuapp.com/tips/${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         }
@@ -34,7 +34,7 @@ export const getSingleTip = (id) => {
 }
 
 export const updateTip = (tip) => {
-    return fetch(`http://localhost:8000/tips/${tip.id}`, {
+    return fetch(`https://spoon-it.herokuapp.com/tips/${tip.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export const updateTip = (tip) => {
 }
 
 export const createNewTip = (newTip) => {
-    return fetch("http://localhost:8000/tips", {
+    return fetch("https://spoon-it.herokuapp.com/tips", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export const createNewTip = (newTip) => {
 }
 
 export const deleteTip = (id) => {
-    return fetch(`http://localhost:8000/tips/${id}`, {
+    return fetch(`https://spoon-it.herokuapp.com/tips/${id}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
@@ -67,7 +67,7 @@ export const deleteTip = (id) => {
 }
 
 export const getCurrentUser = () => {
-    return fetch("http://localhost:8000/get-user",{
+    return fetch("https://spoon-it.herokuapp.com/get-user",{
         headers: {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         }

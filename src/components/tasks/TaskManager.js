@@ -4,14 +4,14 @@ export const getTasks = (params) => {
     let url = "";
     const { categoryId, spoonId, createdBy } = params // Deconstructing params obj. 
     
-    if (categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks?category=${categoryId}&spoon=${spoonId}&created_by`;
-    else if (categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks?category=${categoryId}&spoon=${spoonId}`;
-    else if (categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks?category=${categoryId}&created_by`;
-    else if (categoryId && !spoonId && !createdBy) url = `http://localhost:8000/tasks?category=${categoryId}`;
-    else if (!categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks?spoon=${spoonId}&created_by`;
-    else if (!categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks?spoon=${spoonId}`;
-    else if (!categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks?created_by`;
-    else url = "http://localhost:8000/tasks";
+    if (categoryId && spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks?category=${categoryId}&spoon=${spoonId}&created_by`;
+    else if (categoryId && spoonId && !createdBy) url = `https://spoon-it.herokuapp.com/tasks?category=${categoryId}&spoon=${spoonId}`;
+    else if (categoryId && !spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks?category=${categoryId}&created_by`;
+    else if (categoryId && !spoonId && !createdBy) url = `https://spoon-it.herokuapp.com/tasks?category=${categoryId}`;
+    else if (!categoryId && spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks?spoon=${spoonId}&created_by`;
+    else if (!categoryId && spoonId && !createdBy) url = `https://spoon-it.herokuapp.com/tasks?spoon=${spoonId}`;
+    else if (!categoryId && !spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks?created_by`;
+    else url = "https://spoon-it.herokuapp.com/tasks";
     
     const options = {
         headers: {
@@ -27,14 +27,14 @@ export const getRandomTask = (params) => {
     let url = "";
     const { categoryId, spoonId, createdBy } = params // Deconstructing params obj. 
     
-    if (categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&spoon=${spoonId}&created_by`;
-    else if (categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&spoon=${spoonId}`;
-    else if (categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}&created_by`;
-    else if (categoryId && !spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?category=${categoryId}`;
-    else if (!categoryId && spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?spoon=${spoonId}&created_by`;
-    else if (!categoryId && spoonId && !createdBy) url = `http://localhost:8000/tasks/random_task?spoon=${spoonId}`;
-    else if (!categoryId && !spoonId && createdBy) url = `http://localhost:8000/tasks/random_task?created_by`;
-    else url = "http://localhost:8000/tasks/random_task";
+    if (categoryId && spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?category=${categoryId}&spoon=${spoonId}&created_by`;
+    else if (categoryId && spoonId && !createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?category=${categoryId}&spoon=${spoonId}`;
+    else if (categoryId && !spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?category=${categoryId}&created_by`;
+    else if (categoryId && !spoonId && !createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?category=${categoryId}`;
+    else if (!categoryId && spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?spoon=${spoonId}&created_by`;
+    else if (!categoryId && spoonId && !createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?spoon=${spoonId}`;
+    else if (!categoryId && !spoonId && createdBy) url = `https://spoon-it.herokuapp.com/tasks/random_task?created_by`;
+    else url = "https://spoon-it.herokuapp.com/tasks/random_task";
     
     const options = {
         headers: {
@@ -47,7 +47,7 @@ export const getRandomTask = (params) => {
 }
 
 export const getSingleTask = (id) => {
-    return fetch(`http://localhost:8000/tasks/${id}`, {
+    return fetch(`https://spoon-it.herokuapp.com/tasks/${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         }
@@ -56,7 +56,7 @@ export const getSingleTask = (id) => {
 }
 
 export const getAllCategories = () => {
-    return fetch("http://localhost:8000/categories", {
+    return fetch("https://spoon-it.herokuapp.com/categories", {
         headers:{
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         }
@@ -65,7 +65,7 @@ export const getAllCategories = () => {
 }
 
 export const getAllSpoons = () => {
-    return fetch("http://localhost:8000/spoons", {
+    return fetch("https://spoon-it.herokuapp.com/spoons", {
         headers:{
             "Authorization": `Token ${localStorage.getItem("si_token")}`
         }
@@ -74,7 +74,7 @@ export const getAllSpoons = () => {
 }
 
 export const createNewTask = (newTask) => {
-    return fetch("http://localhost:8000/tasks", {
+    return fetch("https://spoon-it.herokuapp.com/tasks", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export const createNewTask = (newTask) => {
 }
 
 export const updateTask = (task) => {
-    return fetch(`http://localhost:8000/tasks/${task.id}`, {
+    return fetch(`https://spoon-it.herokuapp.com/tasks/${task.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export const updateTask = (task) => {
 }
 
 export const deleteTask = (id) => {
-    return fetch(`http://localhost:8000/tasks/${id}`, {
+    return fetch(`https://spoon-it.herokuapp.com/tasks/${id}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${localStorage.getItem("si_token")}`
